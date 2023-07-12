@@ -43,3 +43,7 @@ Use `did` as ONCHAIN_ISSUER_IDENTITY value.
     * **Value**: set value that you want to verify;
 4. Press submit;
 5. Use mobile application for verify.
+
+
+## Tested on:
+1. MacBook Pro M1, OS: Monterey 12.3
