@@ -1,10 +1,14 @@
 package config
 
 import (
+	"encoding/hex"
 	"errors"
+	"fmt"
 	"log"
 	"os"
+	"strings"
 
+	core "github.com/iden3/go-iden3-core"
 	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v3"
 )
@@ -27,10 +31,35 @@ func (r resolverSettings) Verify() error {
 }
 
 type Config struct {
-	OnchainIssuerIdentity string `envconfig:"ONCHAIN_ISSUER_IDENTITY"`
-	KeyDir                string `envconfig:"KEY_DIR" default:"./keys"`
-	HostUrl               string `envconfig:"HOST_URL"`
+	OnchainIssuerContractAddress    string `envconfig:"ONCHAIN_ISSUER_CONTRACT_ADDRESS" required:"true"`
+	KeyDir                          string `envconfig:"KEY_DIR" default:"./keys"`
+	HostUrl                         string `envconfig:"HOST_URL"`
+	OnchainIssuerContractBlockchain string `envconfig:"ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN" required:"true"`
+	OnchainIssuerContractNetwork    string `envconfig:"ONCHAIN_ISSUER_CONTRACT_NETWORK" required:"true"`
+
+	OnchainIssuerIdentity string
 	Resolvers             resolverSettings
+}
+
+func (c *Config) GetIssuerIdentityDIDFromAddress() error {
+	genesis := genFromHex("00000000000000" + strings.Trim(c.OnchainIssuerContractAddress, "0x"))
+	tp, err := core.BuildDIDType(
+		core.DIDMethodPolygonID,
+		core.Blockchain(c.OnchainIssuerContractBlockchain),
+		core.NetworkID(c.OnchainIssuerContractNetwork),
+	)
+	if err != nil {
+		return err
+	}
+	id := core.NewID(tp, genesis)
+	c.OnchainIssuerIdentity = fmt.Sprintf(
+		"did:polygonid:%s:%s:%v",
+		c.OnchainIssuerContractBlockchain,
+		c.OnchainIssuerContractNetwork,
+		id.String(),
+	)
+
+	return nil
 }
 
 func readResolverConfig(cfg *Config) error {
@@ -61,4 +90,14 @@ func ParseConfig() (Config, error) {
 		return cfg, err
 	}
 	return cfg, nil
+}
+
+func genFromHex(gh string) [27]byte {
+	genBytes, err := hex.DecodeString(gh)
+	if err != nil {
+		panic(err)
+	}
+	var gen [27]byte
+	copy(gen[:], genBytes)
+	return gen
 }

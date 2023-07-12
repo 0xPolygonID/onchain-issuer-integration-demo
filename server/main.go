@@ -25,6 +25,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("can't parse config, err: %v", err)
 	}
+	if err = cfg.GetIssuerIdentityDIDFromAddress(); err != nil {
+		log.Fatalf("can't get issuer identity did from address, err: %v", err)
+	}
 	h := handlers.NewHandler(cfg)
 	r := newRouter(h)
 
