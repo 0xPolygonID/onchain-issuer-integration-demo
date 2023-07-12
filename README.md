@@ -22,8 +22,8 @@ Use `did` as ONCHAIN_ISSUER_IDENTITY value.
 
 ## How to run:
 1. Deploy onchain issuer contract. Use these next states:
-    1.1. For mumbai network: `0x134B1BE34911E39A8397ec6289782989729807a4`
-    1.2. For main net network: `0xdc2A724E6bd60144Cde9DEC0A38a26C619d84B90`
+    * For mumbai network: `0x134B1BE34911E39A8397ec6289782989729807a4`
+    * For main net network: `0xdc2A724E6bd60144Cde9DEC0A38a26C619d84B90`
 2. Fill in the configuration files with the actual values.
 3. Run the run.sh script:
     ```bash
