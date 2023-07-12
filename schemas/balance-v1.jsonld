@@ -1,0 +1,25 @@
+{
+    "@context": [
+      {
+        "@version": 1.1,
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "BalanceCredential": {
+          "@id": "urn:uuid:a84fe933-003b-48f1-aea8-36ca9940a3f5",
+          "@context": {
+            "@version": 1.1,
+            "@protected": true,
+            "id": "@id",
+            "type": "@type",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "balance": {
+              "@id": "balance",
+              "@type": "xsd:integer"
+            }
+          }
+        }
+      }
+    ]
+  }
+  
