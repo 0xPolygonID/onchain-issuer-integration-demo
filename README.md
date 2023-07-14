@@ -32,7 +32,7 @@ ONCHAIN_ISSUER_CONTRACT_NETWORK=<BLOCKCHAIN_OF_WITH_ISSUER_CONTRACT>
     ```
 2. Deploy onchain issuer contract. Use these next states:
     * For mumbai network: `0x134B1BE34911E39A8397ec6289782989729807a4`
-    * For main net network: `0xdc2A724E6bd60144Cde9DEC0A38a26C619d84B90`
+    * For mainnet network: `0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D`
 3. Fill in the configuration files with the actual values.
 4. Run the run.sh script:
     ```bash
