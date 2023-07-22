@@ -47,7 +47,7 @@ const App = () => {
   const claimToBalance = async () => {
       setIsLoaded(true);
       try {
-        const response = await fetch('http://localhost:3333/api/v1/identities/did:polygonid:polygon:mumbai:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/claims', {
+        const response = await fetch(`http://localhost:3333/api/v1/identities/${process.env.NEXT_PUBLIC_ONCHAIN_ISSUER_DID}/claims`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const App = () => {
     
         const data = await response.json();
         
-        const credentialResponse = await fetch(`http://localhost:3333/api/v1/identities/did:polygonid:polygon:mumbai:2qCU58EJgrELbXjWbWGC9kPPnczQdp93nUR6LC45F6/claims/${data.id}`);
+        const credentialResponse = await fetch(`http://localhost:3333/api/v1/identities/${process.env.NEXT_PUBLIC_ONCHAIN_ISSUER_DID}/claims/${data.id}`);
         const credential = await credentialResponse.json();
         
         console.log('credential', credential);

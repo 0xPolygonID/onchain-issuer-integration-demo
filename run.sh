@@ -2,6 +2,11 @@
 
 set -e
 
+# Use the code snippet to generate did from contract address
+# https://github.com/iden3/go-iden3-core/blob/v2/did_test.go#L243
+# Change ethAddrHex to ONCHAIN_ISSUER_CONTRACT_ADDRESS for generat ONCHAIN_ISSUER_DID
+ONCHAIN_ISSUER_DID=
+
 ONCHAIN_ISSUER_CONTRACT_ADDRESS=
 URL_MUMBAI_NODE=
 URL_POLYGON_NODE=
@@ -35,6 +40,7 @@ cp ./onchain-issuer.settings.yaml ./onchain-issuer-demo/onchain-issuer.settings.
 
 # Up frontend
 pushd client
+echo NEXT_PUBLIC_ONCHAIN_ISSUER_DID=$ONCHAIN_ISSUER_DID > .env.local
 npm install
 npm run dev &
 CLIENT_PID=$!
