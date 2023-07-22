@@ -106,8 +106,7 @@
         "type": "object",
         "required": [
           "id",
-          "birthday",
-          "documentType"
+          "birthday"
         ],
         "properties": {
           "id": {
@@ -116,9 +115,6 @@
             "format": "uri"
           },
           "balance": {
-            "type": "integer"
-          },
-          "documentType": {
             "type": "integer"
           }
         }

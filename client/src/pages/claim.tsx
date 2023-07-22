@@ -37,7 +37,6 @@ const App = () => {
         type: 'BalanceCredential',
         credentialSubject: {
           balance: balanceGwei,
-          documentType: Math.ceil(Math.random() * 1000000),
           id: routerQuery.userID,
         },
         expiration: 1893456000,
