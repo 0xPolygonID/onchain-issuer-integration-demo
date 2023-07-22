@@ -2,9 +2,9 @@
 
 set -e
 
-# Use the code snippet to generate did from contract address
-# https://github.com/iden3/go-iden3-core/blob/v2/did_test.go#L243
-# Change ethAddrHex to ONCHAIN_ISSUER_CONTRACT_ADDRESS for generat ONCHAIN_ISSUER_DID
+# Use the code snippet to generate a DID (Decentralized Identifier) from the contract address.
+# You can find the code snippet at: https://github.com/iden3/go-iden3-core/blob/v2/did_test.go#L243
+# Replace "ethAddrHex" with value of "ONCHAIN_ISSUER_CONTRACT_ADDRESS" to generate the ONCHAIN_ISSUER_DID.
 ONCHAIN_ISSUER_DID=
 
 ONCHAIN_ISSUER_CONTRACT_ADDRESS=
