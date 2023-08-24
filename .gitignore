@@ -3,3 +3,4 @@ onchain-issuer-demo
 .vscode
 onchain-issuer.settings.yaml
 resolvers.settings.yaml
+*.log

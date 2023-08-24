@@ -42,27 +42,30 @@ cp ./onchain-issuer.settings.yaml ./onchain-issuer-demo/onchain-issuer.settings.
 pushd client
 echo NEXT_PUBLIC_ONCHAIN_ISSUER_DID=$ONCHAIN_ISSUER_DID > .env.local
 npm install
-npm run dev &
+npm run dev > ./../client.log 2>&1 &
 CLIENT_PID=$!
+echo "PID FOR FRONTEND: $CLIENT_PID"
 popd
 
 # Up server for auth
 pushd server
-docker rm -f mongo || true
-docker run --rm -p 27017:27017  --name mongo -d mongo:latest
 go build -o server
 ONCHAIN_ISSUER_CONTRACT_ADDRESS=$ONCHAIN_ISSUER_CONTRACT_ADDRESS \
 ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN=$ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN \
 ONCHAIN_ISSUER_CONTRACT_NETWORK=$ONCHAIN_ISSUER_CONTRACT_NETWORK \
-./server -dev &
+./server -dev > ./../auth.log 2>&1 &
 SERVER_PID=$!
+echo "PID FOR AUTH SERVER: $SERVER_PID"
 popd
 
 # Up user demo
 pushd onchain-issuer-demo
+docker rm -f mongo || true
+docker run --rm -p 27017:27017  --name mongo -d mongo:latest
 go build -o onchain-issuer-demo
-./onchain-issuer-demo -dev &
+./onchain-issuer-demo -dev > ./../onchain-issuer-demo.log 2>&1 &
 ISSUER_PID=$!
+echo "PID FOR ON CHAIN ISSUER SERVER: $ISSUER_PID"
 popd
 
 trap "kill -9 $CLIENT_PID $SERVER_PID $ISSUER_PID; exit" SIGINT
