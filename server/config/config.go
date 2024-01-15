@@ -42,7 +42,7 @@ type Config struct {
 }
 
 func (c *Config) GetIssuerIdentityDIDFromAddress() error {
-	genesis := genFromHex("00000000000000" + strings.Trim(c.OnchainIssuerContractAddress, "0x"))
+	genesis := genFromHex("00000000000000" + strings.TrimPrefix(c.OnchainIssuerContractAddress, "0x"))
 	tp, err := core.BuildDIDType(
 		core.DIDMethodPolygonID,
 		core.Blockchain(c.OnchainIssuerContractBlockchain),
