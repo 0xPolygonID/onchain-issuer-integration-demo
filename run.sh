@@ -15,6 +15,7 @@ MUMBAI_CONTRACT_STATE_ADDRESS=0x134B1BE34911E39A8397ec6289782989729807a4
 MAIN_CONTRACT_STATE_ADDRESS=0xdc2A724E6bd60144Cde9DEC0A38a26C619d84B90
 ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN="<eth|polygon>"
 ONCHAIN_ISSUER_CONTRACT_NETWORK="<main|mumbai|goerli>"
+NGROK_AUTHTOKEN="<ngrok authtoken>"
 
 if [ ! -d "./onchain-issuer-demo" ]; then
     git clone https://github.com/0xPolygonID/onchain-issuer-demo/
@@ -53,6 +54,7 @@ go build -o server
 ONCHAIN_ISSUER_CONTRACT_ADDRESS=$ONCHAIN_ISSUER_CONTRACT_ADDRESS \
 ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN=$ONCHAIN_ISSUER_CONTRACT_BLOCKCHAIN \
 ONCHAIN_ISSUER_CONTRACT_NETWORK=$ONCHAIN_ISSUER_CONTRACT_NETWORK \
+NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN \
 ./server -dev > ./../auth.log 2>&1 &
 SERVER_PID=$!
 echo "PID FOR AUTH SERVER: $SERVER_PID"
@@ -63,6 +65,7 @@ pushd onchain-issuer-demo
 docker rm -f mongo || true
 docker run --rm -p 27017:27017  --name mongo -d mongo:latest
 go build -o onchain-issuer-demo
+NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN \
 ./onchain-issuer-demo -dev > ./../onchain-issuer-demo.log 2>&1 &
 ISSUER_PID=$!
 echo "PID FOR ON CHAIN ISSUER SERVER: $ISSUER_PID"
