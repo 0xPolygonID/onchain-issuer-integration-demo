@@ -49,6 +49,7 @@ func runNgrok(r chi.Router) error {
 		context.Background(),
 		ngrokCfg.HTTPEndpoint(),
 		ngrok.WithAuthtokenFromEnv(),
+		ngrok.WithRegion("eu"),
 	)
 	if err != nil {
 		return err
