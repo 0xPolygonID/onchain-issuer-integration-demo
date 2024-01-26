@@ -1,3 +1,6 @@
+## Warning: Deprecated!
+New implementation is here: https://github.com/0xPolygonID/onchain-merklized-issuer-demo
+
 # Onchain-issuer-integration-demo
 
 This is an example of using an on-chain issuer. In this application, we communicate with Metamask to retrieve the user's balance and the issuer's claim about the user's balance via the on-chain issuer.
